@@ -1,0 +1,30 @@
+<h1 class="text-center">All Product</h1>
+<div *ngIf="ProductList">
+
+    <mat-table [dataSource]="ProductList.items">
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+        <ng-container matColumnDef="productId">
+            <mat-header-cell  *matHeaderCellDef>Id</mat-header-cell>
+            <mat-cell  *matCellDef="let row">{{row.productId}}</mat-cell>
+        </ng-container>
+        
+
+        <ng-container matColumnDef="nameProduct">
+            <mat-header-cell  *matHeaderCellDef>Name Product</mat-header-cell>
+            <mat-cell  *matCellDef="let row">{{row.nameProduct}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.price}}</mat-cell>
+        </ng-container>
+    </mat-table>
+    <mat-paginator
+    [length]="ProductList.meta.totalCount"
+    [pageSize]="ProductList.meta.pageSize"
+    [pageSizeOptions]="[5,10,20,50]"
+    (page)="pageEvent = $event; onPaginateChange($event)">
+    </mat-paginator>
+</div>

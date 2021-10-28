@@ -1,0 +1,80 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+    <div class="my-container">
+        <h1 class="text-center">{{Title}}</h1>
+
+    <form [formGroup]="addNewProductForm">
+
+        <div class="mb-3" style="display: none;">
+          <label for="exampleInputEmail1" class="form-label">Id</label>
+          <input type="text" class="form-control"  formControlName="productId" />
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Name Product</label>
+          <input type="text" class="form-control"  formControlName="nameProduct" />
+        </div>
+      
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="description"
+          rows="3"></textarea>
+        </div>
+      
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Prices</label>
+          <input type="number" class="form-control" formControlName="price" />
+        </div>
+      
+         <div class="mb-3">
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>Choose a release date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="releaseDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+        <div class="mb-3">
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>Choose a discontinued date</mat-label>
+                <input matInput [matDatepicker]="picker1" formControlName="discontinuedDate">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+        </div> 
+      
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Rating</label>
+          <input type="number" class="form-control" formControlName="rating"/>
+        </div>
+      
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Categories</label>
+          <select class="form-select" aria-label="Default select example" formControlName="categoryId">
+              <option *ngFor="let category of CategoryList" 
+              [ngValue]="category.categoryId">{{category.nameCategory}}</option>
+            </select>
+        </div>
+        
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Suppliers</label>
+          <select class="form-select" aria-label="Default select example" formControlName="supplierId">           
+              <option *ngFor="let supplier of SupplierList" 
+              [ngValue]="supplier.supplierId">{{supplier.nameSupplier}}</option>
+            </select>
+        </div>
+      
+        <button type="submit" class="btn btn-primary" (click)="addProduct()" *ngIf="paramProductId==null"
+         [disabled]="addNewProductForm.invalid">Add</button>
+
+        <button type="submit" class="btn btn-primary" (click)="updateProduct()" *ngIf="paramProductId!=null"
+         [disabled]="addNewProductForm.invalid">Update</button>
+
+        <button type="submit" class="btn btn-light" (click)="comeBack()">Cance</button>
+      </form>
+      
+    </div>
+</div>
+
